@@ -5,7 +5,12 @@ Favor utilizar as respectivas pastas para postar os trabalhos de cada unidade.
 
 Alunos:  
 
-Assunto:  
+- Gabriel de Souza Borba
+- Gustavo Westphal Antunes
+- João Vitor Schmidt
+- Sérgio Fernando Canali Filho
+
+Assunto: RVi - Realidade Virtual Imersiva  
 
 ## [Atividades da Unidade 1](unidade_1 "Atividades da Unidade 1")  
 
