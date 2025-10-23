@@ -1099,7 +1099,7 @@ public class RCC_CarControllerV4 : RCC_Core {
     /// If this vehicle is a truck with a trailer, stores reference to the attached trailer (if any).
     /// </summary>
     public RCC_TruckTrailer attachedTrailer;
-
+    
     private void Awake() {
 
         // Limit the max angular velocity for performance & stability.
