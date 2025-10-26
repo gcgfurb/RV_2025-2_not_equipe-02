@@ -7,10 +7,11 @@ public class RedLightTrigger : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        //if (other.CompareTag("carro")){
-        if (!trafficLight.isRedLightActive){
+        //if (other.CompareTag("carro")) {
+        if (!trafficLight.isRedLightActive && !trafficLight.IsYellow)
+        {
             trafficLight.ForceRedLight(forcedRedDuration);
-            Debug.Log("vermelho");
+            Debug.Log("Forçou vermelho");
         }
         //}
     }
