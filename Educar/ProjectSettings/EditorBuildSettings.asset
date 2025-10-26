@@ -6,7 +6,7 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Scenes/Main Menu.unity
+    path: Assets/Scenes/MainMenu.unity
     guid: 31f968033d4f05742a0d01b29fa8ac4d
   - enabled: 1
     path: Assets/Scenes/SampleScene.unity
@@ -14,6 +14,9 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/semafa.unity
     guid: 3f915b678cf0b1e4291ac13099320d47
+  - enabled: 1
+    path: Assets/Scenes/GameOver.unity
+    guid: 50840009f4f220c4ba339ae8be82114c
   m_configObjects:
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 052faaac586de48259a63d0c4782560b, type: 3}
   m_UseUCBPForAssetBundles: 0

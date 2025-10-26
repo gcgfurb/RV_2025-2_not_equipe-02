@@ -3,11 +3,14 @@ using UnityEngine.SceneManagement;
 
 public class RestartOnCollision : MonoBehaviour
 {
+    [SerializeField] private string gameOverSceneName = "GameOver";
+
     private void OnCollisionEnter(Collision collision)
     {
-        //if (collision.gameObject.CompareTag("carro")) {
-            Debug.Log("bateu, animal");
-            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
-        //}
+        // Exemplo: se quiser restringir apenas ao carro do jogador, descomente a linha abaixo
+        // if (!collision.gameObject.CompareTag("PlayerCar")) return;
+
+        Debug.Log("Colisão detectada! Indo para a tela de Game Over...");
+        SceneManager.LoadScene(gameOverSceneName);
     }
 }

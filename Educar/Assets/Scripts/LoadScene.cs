@@ -45,6 +45,20 @@ public class SceneController : MonoBehaviour
     {
         LoadScene(SceneManager.GetActiveScene().name);
     }
+    public void RestartLevel()
+    {
+        // Recarrega a cena anterior (a que estava sendo jogada)
+        int previousSceneIndex = SceneManager.GetActiveScene().buildIndex - 1;
+
+        if (previousSceneIndex >= 0)
+        {
+            SceneManager.LoadScene(previousSceneIndex);
+        }
+        else
+        {
+            Debug.LogWarning("Nenhuma cena anterior encontrada para reiniciar!");
+        }
+    }
 
     private IEnumerator LoadSceneAdditive(string sceneName)
     {
