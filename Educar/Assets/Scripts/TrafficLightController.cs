@@ -19,6 +19,10 @@ public class TrafficLightController : MonoBehaviour
     private enum LightState { Green, Yellow, Red }
     private LightState currentState = LightState.Green;
 
+    public string CurrentLightState => currentState.ToString();
+    public bool IsYellow => currentState == LightState.Yellow;
+
+
     void Start()
     {
         SetLightState(currentState);
