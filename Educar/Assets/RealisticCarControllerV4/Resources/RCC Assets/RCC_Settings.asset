@@ -466,6 +466,6 @@ MonoBehaviour:
   foldControllerSettings: 1
   foldUISettings: 1
   foldWheelPhysics: 1
-  foldSFX: 0
-  foldOptimization: 0
-  foldTagsAndLayers: 0
+  foldSFX: 1
+  foldOptimization: 1
+  foldTagsAndLayers: 1

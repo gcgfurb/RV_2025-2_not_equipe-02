@@ -239,8 +239,8 @@ public partial class @RCC_InputActions: IInputActionCollection2, IDisposable
                     ""type"": ""Value"",
                     ""id"": ""74b6b726-c60c-461c-b6c3-28e27b55d665"",
                     ""expectedControlType"": ""Axis"",
-                    ""processors"": ""Invert"",
-                    ""interactions"": """",
+                    ""processors"": """",
+                    ""interactions"": ""Press(behavior=2)"",
                     ""initialStateCheck"": true
                 }
             ],

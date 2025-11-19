@@ -124,11 +124,10 @@ public class BeltHandleBehavior : MonoBehaviour
             if (slotRenderer != null)
                 slotRenderer.material.color = corEncaixado;
 
-
             // impede que seja pego novamente
             grabInteractable.enabled = false;
 
-            // FAZER O CINTO SUMIR
+            // 🔥🔥🔥 FAZER O CINTO SUMIR
             if (sumirQuandoEncaixar)
                 SumirAposEncaixe();
 

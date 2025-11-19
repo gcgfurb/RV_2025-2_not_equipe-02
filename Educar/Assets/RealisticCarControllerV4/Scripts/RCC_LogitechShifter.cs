@@ -12,7 +12,6 @@ public class RCC_LogitechShifter : MonoBehaviour
         
         if (carController) {
             // Configura o carro para modo manual
-            carController.automaticGear = false;
             carController.semiAutomaticGear = false;
             carController.automaticClutch = false;
         }
