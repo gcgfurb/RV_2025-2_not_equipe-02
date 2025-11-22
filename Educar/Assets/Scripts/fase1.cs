@@ -1,27 +1,23 @@
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class fase1 : MonoBehaviour
 {
     private void OnTriggerEnter(Collider other)
     {
-        // Verifica se o carro entrou no trigger
         RCC_CarControllerV4 car = other.GetComponentInParent<RCC_CarControllerV4>();
         if (car != null)
         {
-            // Desativa o controle do jogador
             car.canControl = false;
 
-            // Desliga o motor
-            car.KillEngine();
+            Debug.Log("Fim da fase!");
+            Debug.Log("Carregando próxima fase...");
 
-            // Aciona o freio
-            car.brakeInput = 1f;
+            Time.timeScale = 1f;
+            AudioListener.pause = false;
 
-            // Zera a aceleração pra garantir
-            car.throttleInput = 0f;
-
-            // Mensagem de debug
-            Debug.Log("Fim da fase! Motor desligado, carro freado e controle desativado.");
+            int proximaFase = SceneManager.GetActiveScene().buildIndex + 1;
+            SceneManager.LoadScene(proximaFase);
         }
     }
 }
