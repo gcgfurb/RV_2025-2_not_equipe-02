@@ -22,9 +22,9 @@ public class caminho : MonoBehaviour
 
 	private void OnTriggerEnter(Collider other)
 	{
-		if (!other.CompareTag("carroio"))
-		{
-			gameObject.SetActive(false);
+        if (other.gameObject.layer == LayerMask.NameToLayer("RCC_Vehicle"))
+        {
+            gameObject.SetActive(false);
 
 		}
 
