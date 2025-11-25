@@ -96,4 +96,12 @@ public class SceneController : MonoBehaviour
 
         m_FadeCanvasGroup.blocksRaycasts = false;
     }
+    public void QuitGame()
+    {
+        Debug.Log("Fechando o jogo...");
+
+        // Funciona em build
+        Application.Quit();
+
+    }
 }
