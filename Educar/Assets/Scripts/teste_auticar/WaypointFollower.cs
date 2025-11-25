@@ -11,6 +11,14 @@ public class WaypointFollower : MonoBehaviour
     private int currentIndex = 0;
     private float originalSpeed;
 
+
+    private bool shouldStop = false;
+
+    public void SetStop(bool stop)
+    {
+        shouldStop = stop;
+    }
+
     void Start()
     {
         originalSpeed = speed;
@@ -18,7 +26,7 @@ public class WaypointFollower : MonoBehaviour
 
     void Update()
     {
-        if (waypoints.Length == 0) return;
+        if (waypoints.Length == 0 || shouldStop) return;
 
         Transform target = waypoints[currentIndex];
         Vector3 moveDirection = (target.position - transform.position).normalized;
