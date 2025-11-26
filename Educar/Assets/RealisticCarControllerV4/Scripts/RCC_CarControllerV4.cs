@@ -1770,8 +1770,12 @@ public class RCC_CarControllerV4 : RCC_Core {
 
                     bool oppositeDirection = Mathf.Sign(inputs.steerInput) != Mathf.Sign(steerInput);
 
+                    // Reduce steering sensitivity at high speeds - better responsiveness for wheel controllers
+                    float speedFactor = Mathf.Lerp(1f, 0.5f, Mathf.Clamp01(speed / 150f));
+                    float sensitivityAdjustment = steeringSensitivityFactor * Mathf.Lerp(10f, 5f, steerAngle / orgSteerAngle) * speedFactor;
+
                     steerInput = Mathf.MoveTowards(steerInput, inputs.steerInput + counterSteerInput,
-                        (Time.deltaTime * steeringSensitivityFactor * Mathf.Lerp(10f, 5f, steerAngle / orgSteerAngle)) * (oppositeDirection ? 1f : 1f));
+                        Time.deltaTime * sensitivityAdjustment * (oppositeDirection ? 1f : 1f));
 
                 } else {
 
@@ -1848,6 +1852,7 @@ public class RCC_CarControllerV4 : RCC_Core {
 
     }
 
+
     /// <summary>
     /// Clamps steering input if the vehicle is sliding, 
     /// and optionally adds a small counter-steer input if drifting.
@@ -1919,7 +1924,14 @@ public class RCC_CarControllerV4 : RCC_Core {
 
         switch (steeringType) {
             case SteeringType.Curve:
-                steerAngle = steerAngleCurve.Evaluate(speed);
+                // For wheel controllers, reduce the speed-based steering limitation
+                // This helps wheels feel less locked up at high speeds
+                float speedAdjustment = Mathf.Clamp01((steerInput * steerInput) * 1.2f); // More input = less limitation
+                steerAngle = Mathf.Lerp(
+                    steerAngleCurve.Evaluate(speed) * 0.7f,  // Minimum angle
+                    steerAngleCurve.Evaluate(speed),         // Evaluated angle from curve
+                    speedAdjustment
+                );
                 break;
             case SteeringType.Simple:
                 steerAngle = Mathf.Lerp(orgSteerAngle, highspeedsteerAngle, (speed / highspeedsteerAngleAtspeed));
@@ -2771,7 +2783,6 @@ public class RCC_CarControllerV4 : RCC_Core {
 
                         contactSparkeList[i].transform.position = collision.GetContact(0).point;
                         ParticleSystem.EmissionModule em = contactSparkeList[i].emission;
-                        em.rateOverTimeMultiplier = collision.impulse.magnitude / 500f;
                         em.enabled = true;
                         contactSparkeList[i].Play();
                         break;
