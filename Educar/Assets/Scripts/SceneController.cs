@@ -24,26 +24,22 @@ public class SceneController : MonoBehaviour
         if (Instance == null)
         {
             Instance = this;
-            // Mantém esse objeto entre trocas de cena para preservar lastGameplayScene e o singleton
             DontDestroyOnLoad(gameObject);
 
-            // Inscreve para saber sempre quando a cena ativa mudar
+            // Detecta mudanças de cena automaticamente
             SceneManager.activeSceneChanged += OnActiveSceneChanged;
         }
         else
         {
-            lastGameplayScene = "MainMenu"; 
+            lastGameplayScene = "MainMenu";
             DestroyImmediate(gameObject);
         }
     }
 
     private void OnDestroy()
     {
-        // Remove a inscrição para evitar leaks caso o objeto seja destruído
         if (Instance == this)
-        {
             SceneManager.activeSceneChanged -= OnActiveSceneChanged;
-        }
     }
 
     private void Start()
@@ -59,15 +55,9 @@ public class SceneController : MonoBehaviour
         }
     }
 
-    /// <summary>
-    /// Captura quando a cena ativa muda. Se a nova cena for GameOver, salva a cena anterior.
-    /// Isso cobre casos em que o GameOver foi carregado diretamente via SceneManager.LoadScene(...)
-    /// </summary>
+    // Detecta mudança de cena e salva a cena anterior quando entrar no Game Over
     private void OnActiveSceneChanged(Scene previousScene, Scene newScene)
     {
-        Debug.Log("Previous:" + SceneManager.GetActiveScene().name);
-        Debug.Log("New:" + newScene.name);
-        // Ajuste o nome "GameOver" se sua cena tiver outro nome
         if (newScene.name == "GameOver" && previousScene.name != "GameOver")
         {
             lastGameplayScene = previousScene.name;
@@ -79,11 +69,9 @@ public class SceneController : MonoBehaviour
     {
         Debug.Log("Load Scene: " + targetScene);
 
-        // Ainda útil: se usarmos o SceneController para carregar GameOver, também salvamos aqui.
         if (targetScene == "GameOver")
         {
             lastGameplayScene = SceneManager.GetActiveScene().name;
-            Debug.Log("Cena salva para reiniciar (via SceneController.LoadScene): " + lastGameplayScene);
         }
 
         if (!IsFading)
@@ -95,11 +83,11 @@ public class SceneController : MonoBehaviour
         LoadScene(SceneManager.GetActiveScene().name);
     }
 
-    // Reinicia a última cena onde o jogador estava (salva quando entramos em GameOver)
+    // Reinicia a última cena antes do Game Over
     public void RestartLevel()
     {
         if (!string.IsNullOrEmpty(lastGameplayScene))
-        {
+        { 
             Debug.Log("Reiniciando cena: " + lastGameplayScene);
             SceneManager.LoadScene(lastGameplayScene);
         }
@@ -107,6 +95,23 @@ public class SceneController : MonoBehaviour
         {
             Debug.LogWarning("Nenhuma cena registrada para reiniciar!");
         }
+    }
+
+    // NOVO — Carrega a próxima fase depois da FaseConcluida
+    public void LoadNextLevel()
+    {
+        int currentIndex = PlayerPrefs.GetInt("LastPlayableSceneIndex", -1);
+
+        if (currentIndex < 0)
+        {
+            Debug.LogError("Nenhuma fase registrada para continuar!");
+            return;
+        }
+
+        int nextIndex = currentIndex + 1;
+        Debug.Log("Carregando próxima fase: " + nextIndex);
+
+        SceneManager.LoadScene(nextIndex);
     }
 
     private IEnumerator LoadSceneAdditive(string sceneName)
@@ -150,7 +155,6 @@ public class SceneController : MonoBehaviour
     public void QuitGame()
     {
         Debug.Log("Fechando o jogo...");
-
         Application.Quit();
 
 #if UNITY_EDITOR

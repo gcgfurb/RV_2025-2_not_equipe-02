@@ -18,4 +18,8 @@ public class GameManager : MonoBehaviour
     {
         sceneController.RestartLevel();
     }
+    public void NextLevel()
+    {
+        sceneController.LoadNextLevel();
+    }
 }

@@ -9,6 +9,9 @@ EditorBuildSettings:
     path: Assets/Scenes/SampleScene.unity
     guid: 99c9720ab356a0642a771bea13969a05
   - enabled: 1
+    path: Assets/Scenes/MainMenu.unity
+    guid: 31f968033d4f05742a0d01b29fa8ac4d
+  - enabled: 1
     path: Assets/Scenes/f1.unity
     guid: 1f21d847dddedae4282ab43c54bdfecb
   - enabled: 1
@@ -23,6 +26,12 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/f5.unity
     guid: 6cab50b9118ef5849900b88f650df4ca
+  - enabled: 1
+    path: Assets/Scenes/GameOver.unity
+    guid: 50840009f4f220c4ba339ae8be82114c
+  - enabled: 1
+    path: Assets/Scenes/FaseConcluida.unity
+    guid: b7661990db97d404190f9be0b11c8c08
   m_configObjects:
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 052faaac586de48259a63d0c4782560b, type: 3}
     com.unity.xr.management.loader_settings: {fileID: 11400000, guid: d1ad71459c87f614999529392da5d5ad, type: 2}
