@@ -4,6 +4,7 @@ using UnityEngine.XR.Interaction.Toolkit.Interactables;
 
 public class BeltHandleBehavior : MonoBehaviour
 {
+    public static bool cintoEncaixado = false;
     private XRGrabInteractable grabInteractable;
     private Vector3 initialPosition;
     private Quaternion initialRotation;
@@ -115,6 +116,8 @@ public class BeltHandleBehavior : MonoBehaviour
         if (distancia <= distanciaEncaixe)
         {
             encaixado = true;
+
+            BeltHandleBehavior.cintoEncaixado = true;
 
             // encaixa no ponto
             transform.position = pontoEncaixe.position;
