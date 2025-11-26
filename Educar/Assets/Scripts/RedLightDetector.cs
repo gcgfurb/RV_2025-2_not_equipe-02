@@ -7,6 +7,8 @@ public class RedLightDetector : MonoBehaviour
 {
     public TrafficLightController trafficLight;
 
+    private string gameOverSceneName = "GameOverAtravessouSinal";
+
     private void OnTriggerEnter(Collider other)
     {
         //Debug.Log("colidiu");
@@ -15,7 +17,7 @@ public class RedLightDetector : MonoBehaviour
             if (trafficLight.isRedLightActive)
             {
                 Debug.Log("Infração: carro passou no sinal vermelho!");
-                SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex); // reinicia a cemna
+                SceneManager.LoadScene(gameOverSceneName);
 
             } else {
                 Debug.Log("não pego");
